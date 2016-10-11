@@ -1,8 +1,5 @@
 import sys, os
 
-# Make sure you put the mitielib folder into the python search path.  There are
-# a lot of ways to do this, here we do it programmatically with the following
-# two statements:
 parent = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(parent + '/../../MITIE/mitielib')
 
@@ -14,7 +11,7 @@ ner = named_entity_extractor('../uk_model.dat')
 print("\nTags output by this NER model:", ner.get_possible_ner_tags())
 
 def extract(text):
-    tokens = tokenize(text)
+    tokens = [t.decode('utf-8') for t in tokenize(text)]
     entities = ner.extract_entities(tokens)
 
     label = lambda range:  " ".join(tokens[i] for i in range)
@@ -23,7 +20,7 @@ def extract(text):
         "text": text,
         "tokens": tokens,
         "entities": [
-            { "score": e[2], "tag": e[1], "label": label } for e in entities
+            { "score": e[2], "tag": e[1], "label": label(e[0]) } for e in entities
         ]
     }
 
