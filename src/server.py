@@ -3,7 +3,8 @@
 
 from aiohttp import web
 from aiohttp.web import Response
-import json
+import sys, os
+import json, yaml
 from ner import extract, info
 
 class JSONResponse(Response):
@@ -15,6 +16,10 @@ class JSONResponse(Response):
 
         super().__init__(body=body, status=status, reason=reason,
                          headers=headers, content_type='application/json')
+
+
+SWAGGER_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'swagger.yaml')
+print(SWAGGER_PATH)
 
 __author__ = "Mike Chaliy"
 __copyright__ = "Copyright 2016, Lang-UK"
@@ -31,9 +36,15 @@ async def extract_handler(request):
 async def info_handler(request):
     return JSONResponse(info())
 
+async def swagger_handler(request):
+    with open(SWAGGER_PATH, 'r') as f:
+        swagger = yaml.load(f.read())
+        return JSONResponse(swagger)
+
 app = web.Application()
 app.router.add_route("POST", "/ner", extract_handler)
 app.router.add_route("GET", "/ner", info_handler)
+app.router.add_route("GET", "/swagger.json", swagger_handler)
 
 if __name__ == "__main__":
     web.run_app(app)
