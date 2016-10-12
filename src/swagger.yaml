@@ -33,8 +33,25 @@ paths:
           schema:
             $ref: '#/definitions/InfoResponse'
     post:
-      summary: Extract named entities from input
+      summary: Extract named entities from tokenized input
       operationId: extract
+      tags:
+        - ner
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ExtractRequest'
+      responses:
+        '200':
+          description: The request has succeeded
+          schema:
+            $ref: '#/definitions/ExtractResponse'
+  '/ner/text':
+    post:
+      summary: Extract named entities from text input with default MITIE tokenizer
+      operationId: extract_fom_text
       consumes:
         - plain/text
       tags:
@@ -55,6 +72,17 @@ definitions:
   InfoResponse:
     properties:
       tags:
+        description: NER tags suppored by this instance of extractor
+        type: array
+        items:
+          type: string
+  ExtractRequest:
+    properties:
+      text:
+        description: Optional text to be tokenized by default MITIE tokenizer
+        type: string
+      tokens:
+        description: List of tokens to extract named entities from
         type: array
         items:
           type: string

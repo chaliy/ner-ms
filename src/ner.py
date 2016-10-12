@@ -4,14 +4,19 @@ parent = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(parent + '/../../MITIE/mitielib')
 
 from mitie import *
-from collections import defaultdict
 
 print("Loading NER model...")
 ner = named_entity_extractor('../uk_model.dat')
-print("\nTags output by this NER model:", ner.get_possible_ner_tags())
 
-def extract(text):
-    tokens = [t.decode('utf-8') for t in tokenize(text)]
+def extract(spec):
+    if spec is None: return {}
+    text = spec.get('text', None)
+    tokens = spec.get('tokens', None)
+
+    if tokens is None:
+        if text is None: return {}
+        tokens = [t.decode('utf-8') for t in tokenize(text)]
+
     entities = ner.extract_entities(tokens)
 
     label = lambda range:  " ".join(tokens[i] for i in range)
@@ -23,6 +28,9 @@ def extract(text):
             { "score": e[2], "tag": e[1], "label": label(e[0]) } for e in entities
         ]
     }
+
+def extract_from_text(text):
+    return extract({ 'text': text })
 
 def info():
     return {
