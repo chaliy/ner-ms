@@ -11,4 +11,4 @@ ADD src /app
 RUN cd /app; pip install -r requirements.txt
 
 EXPOSE 8080
-CMD ["/app/server.py"]
+CMD ["python", "/app/server.py"]

@@ -9,20 +9,33 @@ The aim of the project is to provide NER using MITIE for Ukrainian language with
 Easiest way to run it though the Docker (even on Windows). Once you have Docker installed, do the following:
 
 ```
-git clone git@github.com:chaliy/ner-ms.git
-cd ner-ms
-docker build -t ner .
-docker run -it -p 8080:8080 ner
-# Open http://localhost:8080/ner
+docker run -it -p 8080:8080 chaliy/ner-ms
 ```
-
-## As is
-
-You can also run app as is on your machine, however this will require all dependencies to be installed. Check Dockerfile for working script.
 
 ## Hosted
 
 Eventually we will provide hosted entry point for your disposal. Ping me in case of urgency.
+
+## Examples
+
+### Curl
+
+Show info about service
+```
+curl http://localhost:8080/ner
+```
+
+Tokenize with default tokenizer and extract named entities
+
+```
+curl -X POST -d "Несе Галя воду, Коромисло гнеться, За нею Іванко, Як барвінок, в’ється." http://localhost:8080/ner/text
+```
+
+Extract named entities for already tokenized text
+
+```
+curl -X POST -H "Content-Type: application/json; charset=UTF-8" -d '{ "tokens": ["Несе","Галя","воду",",","Коромисло","гнеться" ]}' http://localhost:8080/ner
+```
 
 # References
 

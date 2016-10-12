@@ -6,6 +6,8 @@ info:
     name: API Support
     email: mike@chaliy.name
   version: "1.0.0"
+  license:
+    name: MIT
 schemes:
   - http
   - https
