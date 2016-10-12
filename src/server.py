@@ -3,6 +3,7 @@
 
 from aiohttp import web
 from aiohttp.web import Response
+import aiohttp_cors
 import sys, os
 import json, yaml
 from ner import extract, extract_from_text, info
@@ -49,6 +50,17 @@ app.router.add_route("POST", "/ner", extract_handler)
 app.router.add_route("POST", "/ner/text", extract_from_text_handler)
 app.router.add_route("GET", "/ner", info_handler)
 app.router.add_route("GET", "/swagger.json", swagger_handler)
+
+# Enable CORS
+
+cors = aiohttp_cors.setup(app, defaults={
+    "*": aiohttp_cors.ResourceOptions(
+            expose_headers="*",
+            allow_headers="*",
+        )
+})
+
+for route in list(app.router.routes()): cors.add(route)
 
 if __name__ == "__main__":
     web.run_app(app)

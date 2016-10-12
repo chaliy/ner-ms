@@ -14,7 +14,11 @@ docker run -it -p 8080:8080 chaliy/ner-ms
 
 ## Hosted
 
-Eventually we will provide hosted entry point for your disposal. Ping me in case of urgency.
+Eventually we will provide hosted entry point for your disposal. Temporary you can use:
+
+```
+http://proto.63fgxzp2pg.eu-central-1.elasticbeanstalk.com/ner
+```
 
 ## Examples
 
@@ -36,6 +40,10 @@ Extract named entities for already tokenized text
 ```
 curl -X POST -H "Content-Type: application/json; charset=UTF-8" -d '{ "tokens": ["Несе","Галя","воду",",","Коромисло","гнеться" ]}' http://localhost:8080/ner
 ```
+
+### Postman
+
+You can get Postman collection from https://www.getpostman.com/collections/c6db7bb555fc76ab57f5
 
 # References
 
