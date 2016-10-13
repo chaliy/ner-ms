@@ -14,13 +14,6 @@ consumes:
   - application/json
 produces:
   - application/json
-responses:
-      '400':
-        description: Input is malformed or invalid
-      '500':
-        description: Internal error
-      '405':
-        description: Method is not allowed
 paths:
   '/ner':
     get:
@@ -92,5 +85,3 @@ definitions:
         format: double
       tag:
         type: string
-  Text:
-    type: string
