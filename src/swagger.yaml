@@ -10,7 +10,6 @@ info:
     name: MIT
 schemes:
   - http
-  - https
 consumes:
   - application/json
 produces:
@@ -37,6 +36,9 @@ paths:
     post:
       summary: Extract named entities from tokenized input
       operationId: extract
+      x-taskClass: ner
+      x-taskAlgo: mitie
+      x-taskModel: uk
       tags:
         - ner
       parameters:
@@ -45,25 +47,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ExtractRequest'
-      responses:
-        '200':
-          description: The request has succeeded
-          schema:
-            $ref: '#/definitions/ExtractResponse'
-  '/ner/text':
-    post:
-      summary: Extract named entities from text input with default MITIE tokenizer
-      operationId: extract_fom_text
-      consumes:
-        - plain/text
-      tags:
-        - ner
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Text'
       responses:
         '200':
           description: The request has succeeded
