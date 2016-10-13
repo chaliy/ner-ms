@@ -7,7 +7,8 @@ RUN set -ex \
 	&& git clone https://github.com/mit-nlp/MITIE.git \
 	&& cd /MITIE \
 	&& make \
-	&& apk del .build-deps
+	&& apk del .build-deps \
+	&& apk add --no-cache libstdc++
 
 RUN set -ex \
 	&& apk add --no-cache --virtual .fetch-deps  \
