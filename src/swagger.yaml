@@ -15,7 +15,7 @@ consumes:
 produces:
   - application/json
 paths:
-  '/ner':
+  '/ner/mitie/uk':
     get:
       summary: Information about current NER
       operationId: info

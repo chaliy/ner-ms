@@ -6,7 +6,7 @@ from aiohttp.web import Response
 import aiohttp_cors
 import sys, os
 import json, yaml
-from ner import extract, extract_from_text, info
+from ner import extract, info
 
 class JSONResponse(Response):
     """Serialize response to JSON with aiohttp.web"""
@@ -33,10 +33,6 @@ async def extract_handler(request):
     spec = await request.json()
     return JSONResponse(extract(spec))
 
-async def extract_from_text_handler(request):
-    text = await request.text()
-    return JSONResponse(extract_from_text(text))
-
 async def info_handler(request):
     return JSONResponse(info())
 
@@ -46,9 +42,8 @@ async def swagger_handler(request):
         return JSONResponse(swagger)
 
 app = web.Application()
-app.router.add_route("POST", "/ner", extract_handler)
-app.router.add_route("POST", "/ner/text", extract_from_text_handler)
-app.router.add_route("GET", "/ner", info_handler)
+app.router.add_route("POST", "/ner/mitie/uk", extract_handler)
+app.router.add_route("GET", "/ner/mitie/uk", info_handler)
 app.router.add_route("GET", "/swagger.json", swagger_handler)
 
 # Enable CORS

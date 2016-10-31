@@ -35,7 +35,3 @@ def test_extract_empty_tokens():
         'tokens': []
     })
     assert res.get('entities') is not None
-
-def test_extract_from_text():
-    res = extract_from_text('Несе Галя воду, Коромисло гнеться, За нею Іванко, Як барвінок, в’ється.')
-    assert res.get('entities') is not None

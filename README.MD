@@ -17,7 +17,7 @@ docker run -it -p 8080:8080 chaliy/ner-ms
 Eventually we will provide hosted entry point for your disposal. Temporary you can use:
 
 ```
-http://proto.63fgxzp2pg.eu-central-1.elasticbeanstalk.com/ner
+http://proto.63fgxzp2pg.eu-central-1.elasticbeanstalk.com/ner/mitie/uk
 ```
 
 ## Examples
@@ -26,19 +26,13 @@ http://proto.63fgxzp2pg.eu-central-1.elasticbeanstalk.com/ner
 
 Show info about service
 ```
-curl http://localhost:8080/ner
-```
-
-Tokenize with default tokenizer and extract named entities
-
-```
-curl -X POST -d "Несе Галя воду, Коромисло гнеться, За нею Іванко, Як барвінок, в’ється." http://localhost:8080/ner/text
+curl http://localhost:8080/ner/mitie/uk
 ```
 
 Extract named entities for already tokenized text
 
 ```
-curl -X POST -H "Content-Type: application/json; charset=UTF-8" -d '{ "tokens": ["Несе","Галя","воду",",","Коромисло","гнеться" ]}' http://localhost:8080/ner
+curl -X POST -H "Content-Type: application/json; charset=UTF-8" -d '{ "tokens": ["Несе","Галя","воду",",","Коромисло","гнеться" ]}' http://localhost:8080/ner/mitie/uk
 ```
 
 ### Postman
