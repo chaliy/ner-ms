@@ -39,15 +39,15 @@ async def info_handler(request):
 async def swagger_handler(request):
     with open(SWAGGER_PATH, 'r') as f:
         swagger = yaml.load(f.read())
+        swagger['paths']['/']['post']['x-taskModel'] = os.environ['MITIE_MODEL_LANG']
         return JSONResponse(swagger)
 
 app = web.Application()
-app.router.add_route("POST", "/ner/mitie/uk", extract_handler)
-app.router.add_route("GET", "/ner/mitie/uk", info_handler)
+app.router.add_route("POST", "/", extract_handler)
+app.router.add_route("GET", "/", info_handler)
 app.router.add_route("GET", "/swagger.json", swagger_handler)
 
 # Enable CORS
-
 cors = aiohttp_cors.setup(app, defaults={
     "*": aiohttp_cors.ResourceOptions(
             expose_headers="*",

@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   title: Lang-UK NER
-  description: Named entity extractor APIs for UK language with MITIE under the hood and model trained by Lang-UK
+  description: Named entity extractor APIs for UK languages with MITIE under the hood and model trained by Lang-UK
   contact:
     name: Mike Chaliy
     email: mike@chaliy.name
@@ -15,7 +15,7 @@ consumes:
 produces:
   - application/json
 paths:
-  '/ner/mitie/uk':
+  '/':
     get:
       summary: Information about current NER
       operationId: info

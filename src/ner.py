@@ -5,8 +5,9 @@ sys.path.append(parent + '/../../MITIE/mitielib')
 
 from mitie import *
 
-print("Loading NER model...")
-ner = named_entity_extractor('../uk_model.dat')
+MITIE_MODEL = os.environ['MITIE_MODEL']
+print("Loading NER model " + MITIE_MODEL)
+ner = named_entity_extractor(MITIE_MODEL)
 
 def extract(spec):
     if spec is None: return {}
@@ -14,7 +15,7 @@ def extract(spec):
 
     entities = ner.extract_entities(tokens)
 
-    label = lambda range:  " ".join(tokens[i] for i in range)
+    label = lambda range: " ".join(tokens[i] for i in range)
 
     return {
         "tokens": tokens,
@@ -25,5 +26,6 @@ def extract(spec):
 
 def info():
     return {
+        "lang": os.environ['MITIE_MODEL_LANG'],
         "tags": ner.get_possible_ner_tags()
     }

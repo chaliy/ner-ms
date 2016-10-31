@@ -2,9 +2,11 @@
 
 The aim of the project is to provide NER using MITIE for Ukrainian language without the need of installing MITIE.
 
-# Usage
+[![CircleCI](https://circleci.com/gh/chaliy/ner-ms.svg?style=svg)](https://circleci.com/gh/chaliy/ner-ms)
 
-## Docker
+## Usage
+
+### Docker
 
 Easiest way to run it though the Docker (even on Windows). Once you have Docker installed, do the following:
 
@@ -12,12 +14,18 @@ Easiest way to run it though the Docker (even on Windows). Once you have Docker 
 docker run -it -p 8080:8080 chaliy/ner-ms
 ```
 
-## Hosted
+#### Image Variants
+
+- chaliy/ner-ms:uk Ukrainian NER using Lang-UK model
+- chaliy/ner-ms:en English NER using default MITIE model
+- chaliy/ner-ms:ru Russian NER using Lang-UK model
+
+### Hosted
 
 Eventually we will provide hosted entry point for your disposal. Temporary you can use:
 
 ```
-http://proto.63fgxzp2pg.eu-central-1.elasticbeanstalk.com/ner/mitie/uk
+http://proto.63fgxzp2pg.eu-central-1.elasticbeanstalk.com/
 ```
 
 ## Examples
@@ -26,13 +34,13 @@ http://proto.63fgxzp2pg.eu-central-1.elasticbeanstalk.com/ner/mitie/uk
 
 Show info about service
 ```
-curl http://localhost:8080/ner/mitie/uk
+curl http://localhost:8080/
 ```
 
 Extract named entities for already tokenized text
 
 ```
-curl -X POST -H "Content-Type: application/json; charset=UTF-8" -d '{ "tokens": ["Несе","Галя","воду",",","Коромисло","гнеться" ]}' http://localhost:8080/ner/mitie/uk
+curl -X POST -H "Content-Type: application/json; charset=UTF-8" -d '{ "tokens": ["Несе","Галя","воду",",","Коромисло","гнеться" ]}' http://localhost:8080/
 ```
 
 ### Postman

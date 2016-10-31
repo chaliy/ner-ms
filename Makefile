@@ -1,10 +1,10 @@
 .PHONY: all
 
 build:
-	docker build -t ner .
+	docker build --rm=false -f uk.Dockerfile -t chaliy/ner-ms:uk .
 
 run:
-	docker run -it -p 8080:8080 ner
+	docker run -it -p 8080:8080 chaliy/ner-ms:uk
 
 dev:
 	docker run -it -p 8080:8080 -v ./src://app ner sh
