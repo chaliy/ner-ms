@@ -1,6 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import logging
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
+
 from aiohttp import web
 from aiohttp.web import Response
 import aiohttp_cors
@@ -31,7 +34,9 @@ __email__ = "mike@chaliy.name"
 
 async def extract_handler(request):
     spec = await request.json()
-    return JSONResponse(extract(spec))
+    result = extract(spec)
+    logging.info('Extracted entities %d from %d tokens', len(result['tokens']), len(result['entities']))
+    return JSONResponse(result)
 
 async def info_handler(request):
     return JSONResponse(info())
