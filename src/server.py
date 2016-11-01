@@ -16,7 +16,7 @@ class JSONResponse(Response):
 
     def __init__(self, data, status=200,
                  reason=None, headers=None):
-        body = json.dumps(data).encode('utf-8')
+        body = json.dumps(data, ensure_ascii=False).encode('utf-8')
 
         super().__init__(body=body, status=status, reason=reason,
                          headers=headers, content_type='application/json')
