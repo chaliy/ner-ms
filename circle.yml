@@ -10,7 +10,10 @@ dependencies:
 
 test:
   override:
-    - echo "No tests yet. Skipping..."
+    - docker run -v $CIRCLE_TEST_REPORTS://results -it chaliy/ner-ms:uk sh -c "pip install nose2; cd /app; nose2; mv nose2-junit.xml /results/uk-junit.xml"
+    - docker run -v $CIRCLE_TEST_REPORTS://results -it chaliy/ner-ms:en sh -c "pip install nose2; cd /app; nose2; mv nose2-junit.xml /results/en-junit.xml"
+    - docker run -v $CIRCLE_TEST_REPORTS://results -it chaliy/ner-ms:ru sh -c "pip install nose2; cd /app; nose2; mv nose2-junit.xml /results/ru-junit.xml"
+    - ls $CIRCLE_TEST_REPORTS
 
 deployment:
   release:
