@@ -12,18 +12,21 @@ ner = named_entity_extractor(MITIE_MODEL)
 logging.info('NER model %s loaded', MITIE_MODEL)
 
 def extract(spec):
-    if spec is None: return {}
-    tokens = spec.get('tokens', None)
+    if spec is None: spec = {}
+    tokens = spec.get('tokens', [])
 
     entities = ner.extract_entities(tokens)
 
     label = lambda range: " ".join(tokens[i] for i in range)
 
     return {
-        "tokens": tokens,
         "entities": [
             { "score": e[2], "tag": e[1], "label": label(e[0]) } for e in entities
-        ]
+        ],
+        "statistics": {
+            "tokensCount": len(tokens),
+            "entitiesCount": len(entities),
+        }
     }
 
 def info():

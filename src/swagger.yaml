@@ -54,11 +54,11 @@ definitions:
         type: array
         items:
           type: string
+      lang:
+        description: Language supported by this extractor
+        type: string
   ExtractRequest:
     properties:
-      text:
-        description: Optional text to be tokenized by default MITIE tokenizer
-        type: string
       tokens:
         description: List of tokens to extract named entities from
         type: array
@@ -70,12 +70,9 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/ExtractedEntry'
-      text:
-        type: string
-      tokens:
-        type: array
-        items:
-          type: string
+      statistics:
+        $ref: '#/definitions/ExtractStatistics'
+
   ExtractedEntry:
     properties:
       label:
@@ -85,3 +82,10 @@ definitions:
         format: double
       tag:
         type: string
+
+  ExtractStatistics:
+    properties:
+      tokensCount:
+        type: number
+      entitiesCount:
+        type: number

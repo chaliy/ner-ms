@@ -1,4 +1,4 @@
-from ner import extract, extract_from_text, info
+from ner import extract, info
 
 def test_info():
     res = info()
@@ -35,3 +35,11 @@ def test_extract_empty_tokens():
         'tokens': []
     })
     assert res.get('entities') is not None
+
+def test_extract_from_nothing():
+    res = extract(None)
+    assert len(res.get('entities')) is 0
+
+def test_extract_from_almost_nothing():
+    res = extract({})
+    assert len(res.get('entities')) is 0

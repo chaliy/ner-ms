@@ -35,7 +35,9 @@ __email__ = "mike@chaliy.name"
 async def extract_handler(request):
     spec = await request.json()
     result = extract(spec)
-    logging.info('Extracted entities %d from %d tokens', len(result['tokens']), len(result['entities']))
+    logging.info('Extracted %d entities from %d tokens',
+        result['statistics']['entitiesCount'],
+        result['statistics']['tokensCount'])
     return JSONResponse(result)
 
 async def info_handler(request):
