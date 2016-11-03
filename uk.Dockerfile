@@ -23,10 +23,12 @@ RUN set -ex \
 ENV MITIE_MODEL /uk_model.dat
 ENV MITIE_MODEL_LANG uk
 
-ADD src /app
+ADD /src/requirements.txt /app/requirements.txt
 RUN set -ex \
   && cd /app \
   && pip3 install -r requirements.txt --no-cache-dir
+
+ADD src /app
 
 EXPOSE 8080
 CMD ["python", "/app/server.py"]
