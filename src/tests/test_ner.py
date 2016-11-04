@@ -28,6 +28,40 @@ def test_extract():
     })
     assert res.get('entities') is not None
 
+def test_extract_nested():
+    res = extract({
+        'tokens': [[
+            'Несе',
+            'Галя',
+            'воду',
+        ],[
+            'Коромисло',
+            'гнеться',
+        ], [
+            'За',
+            'нею',
+            'Іванко',
+        ], [
+            'Як',
+            'барвінок',
+            ',',
+            'в',
+            '`ється',
+        ]]
+    })
+    assert res.get('entities') is not None
+
+def test_extract_statistics():
+    res = extract({
+        'tokens': [
+            'Несе',
+            'Галя',
+            'воду'
+         ]
+    })
+    assert res['statistics']['tokensCount'] is 3
+    assert res['statistics']['entitiesCount'] is not 0
+
 def test_extract_empty_tokens():
     res = extract({
         'tokens': []
