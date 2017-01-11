@@ -60,7 +60,7 @@ def test_extract_statistics():
          ]
     })
     assert res['statistics']['tokensCount'] is 3
-    assert res['statistics']['entitiesCount'] is not 0
+    assert res['statistics']['entitiesCount'] is not None
 
 def test_extract_empty_tokens():
     res = extract({

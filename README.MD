@@ -20,14 +20,6 @@ docker run -it -p 8080:8080 chaliy/ner-ms
 - chaliy/ner-ms:en English NER using default MITIE model
 - chaliy/ner-ms:ru Russian NER using Lang-UK model
 
-### Hosted
-
-Eventually we will provide hosted entry point for your disposal. Temporary you can use:
-
-```
-http://proto.63fgxzp2pg.eu-central-1.elasticbeanstalk.com/
-```
-
 ## Examples
 
 ### Curl
